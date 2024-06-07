@@ -1,0 +1,9 @@
+Django
+django-cors-headers
+djangorestframework
+gunicorn
+python-decouple
+sqlparse
+psycopg2-binary
+redis
+django-redis

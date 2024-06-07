@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  books-api-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: books-api-service
+    restart: always
+    command: ./start_books_api.sh
+    ports:
+      - "${HOST_MACHINE_WEB_PORT:-8000}:8000"  # Map port from host machine or default to 8000
+    env_file:
+      - ./.env
+      - ./.env.secrets
+    depends_on:
+      - books-db
+    networks:
+      - books_api_network
+
+networks:
+  books_api_network:
+    external: true
