@@ -27,33 +27,6 @@ class User(models.Model):
         db_table = 'users'
 
 
-class Author(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    nickname = models.CharField(unique=True, max_length=100)
-    published_books = models.SmallIntegerField()
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'authors'
-
-
-class Book(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    title = models.CharField(max_length=250)
-    genre = models.CharField(max_length=100)
-    published_at = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'books'
-
-
 class PersonalAccessToken(models.Model):
     id = models.BigAutoField(primary_key=True)
     tokenable_type = models.CharField(max_length=255)
