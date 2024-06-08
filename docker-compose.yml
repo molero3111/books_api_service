@@ -18,6 +18,23 @@ services:
     networks:
       - books_api_network
 
+  books-api-celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: books-api-celery
+    restart: always
+    command: celery -A books_api_service worker --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+      - ./.env.secrets
+    depends_on:
+      - books-api-service
+    networks:
+      - books_api_network
+
 networks:
   books_api_network:
     external: true

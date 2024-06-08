@@ -1,7 +1,7 @@
 from rest_framework.relations import SlugRelatedField
 from rest_framework.serializers import ModelSerializer
 
-from users.models import User, Role
+from apps.users.models import User, Role
 
 
 class RoleSerializer(ModelSerializer):

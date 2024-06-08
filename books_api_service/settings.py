@@ -51,9 +51,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'users',
-    'authors',
-    'books'
+    'apps.users',
+    'apps.authors',
+    'apps.books',
+    'apps.data_export'
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 }
+
+# REDIS
+REDIS_HOST = config('REDIS_HOST', default='books-redis', cast=str)
+REDIS_PORT = config('REDIS_PORT', default='6379', cast=str)
+REDIS_DEFAULT_DB = config('REDIS_DEFAULT_DB', default='0', cast=str)
+
+# Celery settings
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DEFAULT_DB}'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DEFAULT_DB}'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
