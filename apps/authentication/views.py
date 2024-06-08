@@ -3,6 +3,7 @@ from rest_framework.response import Response
 import requests
 
 from books_api_service.settings import LARAVEL_API_URL
+from utils.http import validate_auth_header_format
 
 
 class LoginView(APIView):
@@ -19,20 +20,14 @@ class LoginView(APIView):
 class LogoutView(APIView):
     def post(self, request):
         # Extract the Authorization header
-        auth_header = request.headers.get('Authorization')
+        authorization_header_check = validate_auth_header_format(request)
 
-        if not auth_header:
-            return Response({'error': 'Authorization header is missing'}, status=400)
+        if not authorization_header_check['is_valid']:
+            return authorization_header_check['response']
 
-        # Check if the header starts with 'Bearer '
-        if not auth_header.startswith('Bearer '):
-            return Response({'error': 'Invalid token format'}, status=400)
-
-        # Extract the token
-        token = auth_header.split(' ')[1]
         # Send a request to the logout endpoint
         response = requests.post(f'{LARAVEL_API_URL}logout', headers={
-            'Authorization': f'Bearer {token}',
+            'Authorization': authorization_header_check.get("header"),
             'Accept': 'application/json'
         })
         # Return the response from the logout endpoint to the client

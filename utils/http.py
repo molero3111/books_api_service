@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 
 def get_delete_response(delete_request):
-    object_to_delete = delete_request.get_object() # gets the object to delete instance, the model itself
+    object_to_delete = delete_request.get_object()  # gets the object to delete instance, the model itself
     serialized_object = (delete_request.serializer_class(
         object_to_delete
     ).data)  # extracts and serializes to json the model data before it is deleted
@@ -23,3 +23,21 @@ def get_delete_response(delete_request):
         },
         status=HTTP_200_OK
     )
+
+
+def validate_auth_header_format(request):
+    authorization_header = request.headers.get('Authorization')
+    if not authorization_header:
+        return {
+            "is_valid": False,
+            "response": Response({'error': 'Authorization header is missing'}, status=400)
+        }
+    # Check if the header starts with 'Bearer '
+    if not authorization_header.startswith('Bearer '):
+        return {
+            "is_valid": False,
+            "response": Response({'error': 'Invalid token format'}, status=400)
+        }
+    return {"is_valid": True,
+            "header": authorization_header
+            }
