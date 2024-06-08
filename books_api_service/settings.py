@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'apps.authentication',
     'apps.users',
     'apps.authors',
     'apps.books',
@@ -164,3 +165,5 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+
+LARAVEL_API_URL = config('LARAVEL_API_URL', default='http://localhost:8000/api/', cast=str)

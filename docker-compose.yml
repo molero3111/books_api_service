@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   books-api-service:
     build:
@@ -11,7 +9,7 @@ services:
     restart: always
     command: ./start_books_api.sh --environment=local
     ports:
-      - "${HOST_MACHINE_WEB_PORT:-8000}:8000"  # Map port from host machine or default to 8000
+      - "${HOST_MACHINE_WEB_PORT:-8001}:8001"  # Map port from host machine or default to 8000
     env_file:
       - ./.env
       - ./.env.secrets
