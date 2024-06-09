@@ -16,12 +16,10 @@ mentioned above.
 - **Language**: Python
 - **Framework**: Django
 - **Packages:**: 
-    - laravel/sanctum (For JWT authentication)
-    - maatwebsite/excel (For xlsx file generation)
     - djangorestframework
     - celery (Task queue manager)
-    openpyxl (xlsx generator)
-    requests (For sending requests to external APIs)
+    - openpyxl (xlsx generator)
+    - requests (For sending requests to external APIs)
 - **Database**: PostgresSQL
 - **Cache**: Redis (For job queue)
 
