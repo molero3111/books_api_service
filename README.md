@@ -99,6 +99,9 @@ For further testing and usage, follow documentation bellow to send requests to t
 The API documentation is on postman, you may find it here: 
 https://www.postman.com/molero3111/workspace/books-api/documentation/9720967-ecb6b09c-1a10-41f0-9c1e-ddc57924699e
 
+There are two documentation, follow the books API Service documentation,
+which is the documentation for the API of this project.
+
 ### Project insights
 - For didactic purposes, a task queue is set up with celery, the only tasks it processes in the project
 is the update of published_books in author model, using django signals and events as well.
