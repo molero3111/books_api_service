@@ -7,9 +7,9 @@ services:
       - .:/app  # Maps the current directory on the host to /app directory in the container.
     container_name: books-api-service
     restart: always
-    command: ./start_books_api.sh --environment=local
+    command: ./start_books_api.sh --environment=${ENVIRONMENT}
     ports:
-      - "${HOST_MACHINE_WEB_PORT:-8001}:8001"  # Map port from host machine or default to 8000
+      - "${HOST_MACHINE_WEB_PORT:-8001}:${CONTAINER_PORT:-8001}"  # Map port from host machine or default to 8000
     env_file:
       - ./.env
       - ./.env.secrets
