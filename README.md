@@ -99,3 +99,14 @@ For further testing and usage, follow documentation bellow to send requests to t
 The API documentation is on postman, you may find it here: 
 https://www.postman.com/molero3111/workspace/books-api/documentation/9720967-ecb6b09c-1a10-41f0-9c1e-ddc57924699e
 
+### Project insights
+- For didactic purposes, a task queue is set up with celery, the only tasks it processes in the project
+is the update of published_books in author model, using django signals and events as well.
+You can see the signals and events for the Book model in the signals.py file located in book app
+you can also view the update_published_books task in tasks.py also located in books app.
+- There is an export data app which contains logic to generate and download a xlsx file with
+all the data in Author and Book models
+- All routes are protected by reusing JWT generated on books API project using laravel sanctum,
+there a class called IsValidToken in the permissions.py file located in authentication app, said
+class is used on users, authors, and books views by setting the ViewSet class attribute permission_classes,
+which protects and authorizes the routes.
