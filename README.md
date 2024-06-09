@@ -38,7 +38,7 @@ custom command, for this API service to work properly.
 git clone https://github.com/molero3111/books_api_service.git
 ```
 
-2. cd into notes api repository:
+2. cd into books_api_service repository:
 
 ```bash
 cd books_api_service/
